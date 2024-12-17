@@ -50,9 +50,26 @@ const observer = new IntersectionObserver((entries) => {
             // Find the index of the current section
             const index = Array.from(sections).indexOf(entry.target);
             updateActiveBar(index);
+
             // Add animation class to boxes in the section when it becomes visible
             const boxes = entry.target.querySelectorAll('.box');
-            boxes.forEach(box => box.classList.add('animate'));
+            boxes.forEach((box, i) => {
+                // Determine the direction of translateY based on the position
+                const boxRect = box.getBoundingClientRect();
+                let translateYValue = 0;
+
+                // Adjust translateY based on the box's position relative to the center
+                if (boxRect.top < window.innerHeight / 2) {
+                    translateYValue = 200;  // Coming up from below the center
+                } else {
+                    translateYValue = -200; // Coming down from above the center
+                }
+
+                // Apply the calculated translateY value and trigger the animation
+                box.classList.add('animate');
+                box.style.animationDelay = `${i * 0.2}s`; // Delay each box by 0.2s
+                box.style.transform = `translateY(${translateYValue}px)`; // Apply the translateY dynamically
+            });
         }
     });
 }, observerOptions);
@@ -61,6 +78,7 @@ const observer = new IntersectionObserver((entries) => {
 sections.forEach((section) => {
     observer.observe(section);
 });
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('section');
@@ -128,3 +146,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+const cursorGlow = document.getElementById("cursor-glow");
+
+    document.addEventListener("mousemove", (e) => {
+      cursorGlow.style.transform = `translate(${e.clientX - 15}px, ${e.clientY - 15}px)`;
+    });

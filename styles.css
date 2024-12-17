@@ -13,7 +13,21 @@ body {
     justify-content: space-between;
     height: 100vh;
     overflow: hidden;
+    cursor: none;
 }
+
+/* Cursor Glow */
+#cursor-glow {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle, rgba(102, 102, 102, 0.535), rgba(0, 0, 0, 0));
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: -1;
+    transition: transform 0.05s;
+  }
+  
 
 /* Main Content */
 .content {
@@ -26,8 +40,8 @@ body {
 section {
     min-height: 100vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: left;
+    justify-content: left;
     padding: 20px;
     border-bottom: 1px solid #444;
     box-sizing: border-box;
@@ -35,6 +49,64 @@ section {
     transform: none; /* Remove any transforms */
     animation: none; /* Remove animation */
 }
+
+/* ABOUT Section Layout */
+.about-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 50px;
+    gap: 30px;
+}
+
+/* Left Side of ABOUT Section */
+.about-left {
+    flex: 0.5;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.about-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #e0e0e0;
+    margin-bottom: 20px;
+}
+
+.profile-picture {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 40px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    animation: textEnter 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    background-image: url('Example.png'); /* Add Rhombus.png as background */
+}
+
+.about-summary {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #ccc;
+    max-width: 400px;
+    animation: textEnter 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Right Side of ABOUT Section */
+.about-right {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-start;
+}
+
+.about-right .box {
+    opacity: 0; /* Initially hidden */
+    animation: boxEnter 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
 
 /* Box Animation */
 .box {
@@ -48,30 +120,45 @@ section {
     transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     opacity: 0; /* Start invisible */
+    animation: none; /* Remove animation */
 }
 
 /* New Keyframe Animation for Boxes */
 @keyframes boxEnter {
     from {
-        transform: translateX(75%) scale(0.5); /* Start from the side, small size */
+        transform: translateX(500px) /* translateY(center) */ translateY(200px)  scale(0.5); /* Start from the side, small size */
         opacity: 0;
     }
     to {
         transform: translateX(0) scale(1); /* Full size and position */
-        opacity: 1;
+        opacity: 0.75;
+    }
+}
+
+/* New Keyframe Animation for Text and Profile Picture */
+@keyframes textEnter {
+    from {
+        transform: translateY(200px)  scale(0.5); /* Start from the side, small size */
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0) scale(1); /* Full size and position */
+        opacity: 0.75;
     }
 }
 
 /* Trigger box animation when section becomes visible */
 .box.animate {
-    animation: boxEnter 0.8s ease-out forwards;
+    animation: boxEnter 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
+
 
 /* Hover Effect for Boxes */
 .box:hover {
     background: linear-gradient(45deg, #333, #555); /* Brightened gradient */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
-    transform: scale(1.1); /* Slight enlargement */
+    transform: scale(1.2); /* Slight enlargement */
+    opacity: 1;
 }
 
 /* Responsive Box Sizing */
@@ -99,7 +186,7 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 600px;
+    width: 500px;
     height: 70%;  /* Adjust the height to make it smaller */
     overflow: hidden;
     z-index: 10;
