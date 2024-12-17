@@ -24,13 +24,70 @@ body {
 }
 
 section {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 20px;
     border-bottom: 1px solid #444;
-    opacity: 0;
-    animation: sectionEnter 0.8s ease-out forwards;
+    box-sizing: border-box;
+    opacity: 1; /* Ensure sections are always visible */
+    transform: none; /* Remove any transforms */
+    animation: none; /* Remove animation */
+}
+
+/* Box Animation */
+.box {
+    background: #222; /* Dark base color */
+    color: #e0e0e0;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 20px;
+    display: inline-block;
+    text-align: center;
+    transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    opacity: 0; /* Start invisible */
+}
+
+/* New Keyframe Animation for Boxes */
+@keyframes boxEnter {
+    from {
+        transform: translateX(75%) scale(0.5); /* Start from the side, small size */
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0) scale(1); /* Full size and position */
+        opacity: 1;
+    }
+}
+
+/* Trigger box animation when section becomes visible */
+.box.animate {
+    animation: boxEnter 0.8s ease-out forwards;
+}
+
+/* Hover Effect for Boxes */
+.box:hover {
+    background: linear-gradient(45deg, #333, #555); /* Brightened gradient */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+    transform: scale(1.1); /* Slight enlargement */
+}
+
+/* Responsive Box Sizing */
+.box.large {
+    width: 300px;
+    height: 300px;
+}
+
+.box.medium {
+    width: 200px;
+    height: 200px;
+}
+
+.box.small {
+    width: 100px;
+    height: 100px;
 }
 
 /* Scrollspy Element */
@@ -47,7 +104,7 @@ section {
     overflow: hidden;
     z-index: 10;
     pointer-events: none; /* Prevents the pseudo-element from interfering with clicks */
-    background: linear-gradient(to bottom, transparent 0%, #121212 20%, #121212 80%, transparent 100%); /* Fading from top to bottom */
+    background: transparent; /* Make background transparent */
 }
 
 /* Bars within Scrollspy */
@@ -81,7 +138,7 @@ section {
     opacity: 0.4; /* Slightly faded */
 }
 
-/* Ensure the container is centered */
+/* Section Container */
 .section-container {
     display: flex;
     justify-content: center;
@@ -89,108 +146,27 @@ section {
     width: 100%;
 }
 
-/* Box Styling */
-.box {
-    background: #222; /* Dark base color */
-    color: #e0e0e0;
-    border-radius: 10px;
-    margin: 10px;
-    padding: 20px;
-    display: inline-block;
-    text-align: center;
-    transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-}
-
-/* Hover Effect for Boxes */
-.box:hover {
-    background: linear-gradient(45deg, #333, #555); /* Brightened gradient */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
-    transform: scale(1.1); /* Slight enlargement */
-}
-
-/* Responsive Box Sizing */
-.box.large {
-    width: 300px;
-    height: 300px;
-}
-
-.box.medium {
-    width: 200px;
-    height: 200px;
-}
-
-.box.small {
-    width: 100px;
-    height: 100px;
-}
-
-/* Section Animation */
-@keyframes sectionEnter {
-    from {
-        transform: translateX(100%) scale(0.5); /* Start small and from the right */
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0) scale(1); /* End at normal size and position */
-        opacity: 1;
-    }
-}
-
-/* Apply Animation to Sections */
-section {
-    opacity: 0;
-    animation: sectionEnter 0.8s ease-out forwards;
-}
-
 /* Initial Hidden State for Sections */
 section.hidden {
-    animation: none;
-    opacity: 0;
-    transform: translateX(50%) scale(0.5);
+    opacity: 1; /* Ensure sections are visible even if 'hidden' class is applied */
+    transform: none;
 }
 
-/* Scrollspy Section Animations */
-@keyframes growBox {
-    0% {
-        transform: scale(0.5);
-        opacity: 0;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
+/* Fade Elements at Top and Bottom
+.scrollspy-fade {
+    position: absolute;
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
+    z-index: 2;
+    pointer-events: none;
 }
 
-/* Apply Animation for Spy Bars */
-.spy-bar:nth-child(1) {
-    animation-delay: 0s;
+.scrollspy-fade.bottom {
+    bottom: 0;
+    transform: rotate(180deg);
 }
 
-.spy-bar:nth-child(2) {
-    animation-delay: 0.2s;
-}
-
-.spy-bar:nth-child(3) {
-    animation-delay: 0.4s;
-}
-
-.spy-bar:nth-child(4) {
-    animation-delay: 0.6s;
-}
-
-.spy-bar:nth-child(5) {
-    animation-delay: 0.8s;
-}
-
-.spy-bar:nth-child(6) {
-    animation-delay: 1s;
-}
-
-.spy-bar:nth-child(7) {
-    animation-delay: 1.2s;
-}
-
-.spy-bar:nth-child(8) {
-    animation-delay: 1.4s;
-}
+.scrollspy-fade.top {
+    top: 0;
+} */

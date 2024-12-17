@@ -5,7 +5,7 @@ const sections = document.querySelectorAll('section');
 // Function to update active scrollspy bar
 function updateActiveBar(index) {
     spyBars.forEach((bar, i) => {
-        if (i - 2 === index) {
+        if (i - 2 === index) { // (2) Number of unused scrollbars above of the used bars
             bar.classList.add('active');
         } else {
             bar.classList.remove('active');
@@ -23,21 +23,25 @@ function clickUpdateActiveBar(index){
     });
  }
 
-// Scrollspy Click Behavior
-spyBars.forEach((bar, index) => {
+ spyBars.forEach((bar, index) => {
     bar.addEventListener('click', () => {
-        sections[index - 2].scrollIntoView({
-            behavior: 'smooth',
-            block: 'center'
-        });
-        clickUpdateActiveBar(index); // Update the active bar on click
+        const targetSection = sections[index - 2]; // (2) Number of unused scrollbars above of the used bars
+        if (targetSection) {
+            targetSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest', // Aligns properly within the viewport
+                inline: 'nearest'
+            });
+        }
+        clickUpdateActiveBar(index);
     });
 });
+
 
 // Intersection Observer to track sections on scroll
 const observerOptions = {
     root: null, // Observe within the viewport
-    threshold: 0.6, // 60% of the section must be visible to activate
+    threshold: 0.8, // 80% of the section must be visible to activate
 };
 
 const observer = new IntersectionObserver((entries) => {
@@ -46,6 +50,9 @@ const observer = new IntersectionObserver((entries) => {
             // Find the index of the current section
             const index = Array.from(sections).indexOf(entry.target);
             updateActiveBar(index);
+            // Add animation class to boxes in the section when it becomes visible
+            const boxes = entry.target.querySelectorAll('.box');
+            boxes.forEach(box => box.classList.add('animate'));
         }
     });
 }, observerOptions);
@@ -121,5 +128,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-
-
