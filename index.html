@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrollspy Element</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="content">
+        <section id="about" class="hidden">
+            <div class="box large">About Section Content</div>
+            <div class="box medium">Another Box</div>
+        </section>
+        <section id="contact" class="hidden">
+            <div class="box small">Contact Box</div>
+            <div class="box medium">Another Contact Box</div>
+        </section>
+        <section id="projects" class="hidden">
+            <div class="box large">Project 1</div>
+            <div class="box large">Project 2</div>
+        </section>
+    </div>
+    
+    <div class="scrollspy">
+        <div class="scrollspy-fade top"></div> <!-- Fade at the top -->
+        <div class="scrollspy-fade bottom"></div> <!-- Fade at the bottom -->
+        
+        <div class="spy-bar"></div>
+        <div class="spy-bar"></div>
+        <div class="spy-bar" data-target="about">About</div>
+        <div class="spy-bar" data-target="contact">Contact</div>
+        <div class="spy-bar" data-target="projects">Projects</div>
+        <div class="spy-bar"></div>
+        <div class="spy-bar"></div>
+    </div>
+    
+
+    <script src="script.js"></script>
+</body>
+</html>

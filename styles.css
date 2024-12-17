@@ -1,0 +1,196 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Main Content */
+.content {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: scroll;
+    height: 100%;
+}
+
+section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #444;
+    opacity: 0;
+    animation: sectionEnter 0.8s ease-out forwards;
+}
+
+/* Scrollspy Element */
+.scrollspy {
+    position: fixed;
+    right: -200px; /* Flow into the right side */
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 600px;
+    height: 70%;  /* Adjust the height to make it smaller */
+    overflow: hidden;
+    z-index: 10;
+    pointer-events: none; /* Prevents the pseudo-element from interfering with clicks */
+    background: linear-gradient(to bottom, transparent 0%, #121212 20%, #121212 80%, transparent 100%); /* Fading from top to bottom */
+}
+
+/* Bars within Scrollspy */
+.spy-bar {
+    background-color: #333;
+    color: #e0e0e0;
+    text-align: left;
+    padding: 30px 40px; /* Larger padding for bigger bars */
+    margin: 10px 0; /* Increase spacing between bars */
+    border-radius: 100px;
+    width: 50%; /* Slightly wider bars */
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s, opacity 0.3s;
+    opacity: 0.4;
+    font-size: 1.2rem; /* Larger font size */
+    pointer-events: auto; /* Re-enable click events for bars */
+    transform: scale(0.8); /* Start with slightly smaller bars */
+}
+
+/* Active Bar Styling */
+.spy-bar.active {
+    transform: scale(1.3); /* Bigger scale for active bar */
+    background-color: #555;
+    opacity: 1; /* Full opacity for active */
+}
+
+/* Non-Active Bar Styling */
+.spy-bar:not(.active) {
+    transform: scale(1); /* Reset to normal scale */
+    background-color: #333; /* Reset to normal background color */
+    opacity: 0.4; /* Slightly faded */
+}
+
+/* Ensure the container is centered */
+.section-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* Box Styling */
+.box {
+    background: #222; /* Dark base color */
+    color: #e0e0e0;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 20px;
+    display: inline-block;
+    text-align: center;
+    transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Hover Effect for Boxes */
+.box:hover {
+    background: linear-gradient(45deg, #333, #555); /* Brightened gradient */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+    transform: scale(1.1); /* Slight enlargement */
+}
+
+/* Responsive Box Sizing */
+.box.large {
+    width: 300px;
+    height: 300px;
+}
+
+.box.medium {
+    width: 200px;
+    height: 200px;
+}
+
+.box.small {
+    width: 100px;
+    height: 100px;
+}
+
+/* Section Animation */
+@keyframes sectionEnter {
+    from {
+        transform: translateX(100%) scale(0.5); /* Start small and from the right */
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0) scale(1); /* End at normal size and position */
+        opacity: 1;
+    }
+}
+
+/* Apply Animation to Sections */
+section {
+    opacity: 0;
+    animation: sectionEnter 0.8s ease-out forwards;
+}
+
+/* Initial Hidden State for Sections */
+section.hidden {
+    animation: none;
+    opacity: 0;
+    transform: translateX(50%) scale(0.5);
+}
+
+/* Scrollspy Section Animations */
+@keyframes growBox {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Apply Animation for Spy Bars */
+.spy-bar:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.spy-bar:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.spy-bar:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.spy-bar:nth-child(4) {
+    animation-delay: 0.6s;
+}
+
+.spy-bar:nth-child(5) {
+    animation-delay: 0.8s;
+}
+
+.spy-bar:nth-child(6) {
+    animation-delay: 1s;
+}
+
+.spy-bar:nth-child(7) {
+    animation-delay: 1.2s;
+}
+
+.spy-bar:nth-child(8) {
+    animation-delay: 1.4s;
+}
