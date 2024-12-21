@@ -41,7 +41,7 @@ function clickUpdateActiveBar(index){
 // Intersection Observer to track sections on scroll
 const observerOptions = {
     root: null, // Observe within the viewport
-    threshold: 0.8, // 80% of the section must be visible to activate
+    threshold: 0.25, // 25% of the section must be visible to activate
 };
 
 const observer = new IntersectionObserver((entries) => {
@@ -67,9 +67,11 @@ const observer = new IntersectionObserver((entries) => {
 
                 // Apply the calculated translateY value and trigger the animation
                 box.classList.add('animate');
-                box.style.animationDelay = `${i * 0.2}s`; // Delay each box by 0.2s
+                box.style.animationDelay = `${i * 0.2 + 0.75}s`; // Delay each box by 0.2s
                 box.style.transform = `translateY(${translateYValue}px)`; // Apply the translateY dynamically
             });
+
+            const contact = entry.target.querySelectorAll('.box');
         }
     });
 }, observerOptions);

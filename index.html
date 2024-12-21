@@ -5,9 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scrollspy Element</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="cursor-glow"></div>
+    <div class="confetti">
+        <div class="inner-flex">
+            <h4>🎉</h4>
+        </div>
+    </div>
+    
 
     <div class="content">
         <section id="about" class="hidden about-section">
@@ -25,14 +32,16 @@
         
             <!-- Right Side -->
             <div class="about-right">
-                <div class="box large">Experience</div>
-                <div class="box medium">Skills</div>
+                <a href="https://www.linkedin.com/in/arthur-wigo-2235062aa/" target="_blank" style="text-decoration: none; color: inherit;"><div class="box large">Linkedin</div></a>
+                <div class="box large">Skills</div>
+                <div class="box medium">Education</div>
                 <div class="box small">Projects</div>
                 <div class="box medium">Education</div>
+                <div class="box small">Projects</div>
             </div>
         </section>
         
-        <section id="contact" class="hidden">
+        <section id="experiences" class="hidden">
             <div class="box small">Contact Box</div>
             <div class="box medium">Another Contact Box</div>
         </section>
@@ -49,15 +58,49 @@
         <div class="spy-bar"></div>
         <div class="spy-bar"></div>
         <div class="spy-bar" data-target="about">About</div>
-        <div class="spy-bar" data-target="contact">Contact</div>
+        <div class="spy-bar" data-target="experiences">Experiences</div>
         <div class="spy-bar" data-target="projects">Projects</div>
         <div class="spy-bar"></div>
         <div class="spy-bar"><a href="https://example.com" target="_blank" style="text-decoration: none; color: inherit;">
             Psst... want to know more?
         </a></div>
     </div>
-    
 
     <script src="script.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.1.2/dist/confetti.browser.min.js"></script>
+
+    <script>
+    // Confetti function
+    function launchConfetti() {
+        const end = Date.now() + 2 * 1000; // Confetti duration: 2 seconds
+        const colors = ['#FFCB4C', '#DAF7A6', '#33FF57', '#C70039', '#FF33A8', '#F3FF33', '#33FFF3', '#C70039', '#900C3F', '#DAF7A6'];
+
+        (function frame() {
+            confetti({
+                particleCount: 5, // Adjust particle count
+                angle: 60,
+                spread: 100,
+                origin: { x: 0 },
+                colors: colors
+            });
+            confetti({
+                particleCount: 5, // Adjust particle count
+                angle: 120,
+                spread: 100,
+                origin: { x: 1 },
+                colors: colors
+            });
+            if (Date.now() < end) {
+                requestAnimationFrame(frame);
+            }
+        }());
+    }
+
+    // Add click event listener with delay
+    document.querySelector('.confetti').addEventListener('click', function () {launchConfetti()});
+    </script>
 </body>
 </html>
